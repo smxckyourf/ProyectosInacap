@@ -226,3 +226,18 @@ footer a{
           transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0; /* Opcional: separa el filtro del contenido */
+}
+
+.form-container {
+  text-align: center;
+  margin: 20px 0; /* Opcional: ajusta el espacio alrededor */
+}
+
+form {
+  display: inline-block; /* Hace que el formulario se comporte como un elemento en línea */
+}

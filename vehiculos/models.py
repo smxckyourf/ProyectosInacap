@@ -12,6 +12,7 @@ class Vehiculo(models.Model):
     color = models.CharField(max_length=30)
     descripcion = models.TextField()
     disponibilidad = models.BooleanField(default=True)
+    categoria = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return f"{self.marca} {self.modelo} ({self.año})"

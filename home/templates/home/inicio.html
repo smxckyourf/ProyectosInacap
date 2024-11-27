@@ -89,6 +89,36 @@
           </button>
         </div>
       </header> 
+      <br>
+      <br>
+      <div class="form-container">
+        <form method="get" action="{% url 'home:inicio' %}">
+            <!-- Filtro de Marca -->
+
+            <select name="marca" id="marca">
+                <option value="">Todas las marcas</option>
+                {% for marca in marcas %}
+                    <option value="{{ marca }}" {% if marca == marca_seleccionada %}selected{% endif %}>
+                        {{ marca }}
+                    </option>
+                {% endfor %}
+            </select>
+    
+            <!-- Filtro de Categoría -->
+
+            <select name="categoria" id="categoria">
+                <option value="">Todas las categorías</option>
+                {% for categoria in categorias %}
+                    <option value="{{ categoria }}" {% if categoria == categoria_seleccionada %}selected{% endif %}>
+                        {{ categoria }}
+                    </option>
+                {% endfor %}
+            </select>
+    
+            <button class=" btn btn-dark btm-sm" type="submit">Filtrar</button>
+        </form>
+    </div>
+      
       
       {% block content %}
       <div class="container-fluid">

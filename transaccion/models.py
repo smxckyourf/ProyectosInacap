@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from vehiculos.models import Vehiculo
 
 class Transaccion(models.Model):
     ESTADOS_TRANSACCION = [
@@ -18,7 +19,7 @@ class Transaccion(models.Model):
     session_id = models.CharField(max_length=100, unique=True)
     token_ws = models.CharField(max_length=255, unique=True)
     descripcion = models.TextField(blank=True, null=True)
-    
+    vehiculo = models.ForeignKey(Vehiculo, on_delete=models.CASCADE, null=True, blank=True)
     # Datos adicionales de Webpay
     payment_type_code = models.CharField(max_length=50, blank=True, null=True)
     response_code = models.IntegerField(blank=True, null=True)

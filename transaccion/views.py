@@ -9,6 +9,7 @@ import random
 from vehiculos.models import Vehiculo
 from reserva_vehiculo.models import Reserva
 from transaccion.models import Transaccion
+import uuid
 
 
 logger = logging.getLogger(__name__)
@@ -34,7 +35,7 @@ def iniciar_pago(request, vehiculo_id):
     tx = Transaction(options)
 
     buy_order = f"orden_{reserva.id}"  # Usar el ID de la reserva para referencia
-    session_id = f"session_{request.user.id}"
+    session_id = str(uuid.uuid4())
     return_url = request.build_absolute_uri('/webpay-confirmacion/')
 
     try:
