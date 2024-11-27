@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>   
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/repuestos.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repuestos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
+</head>
+
+<body>
+    <header>
+        <!-- Navbar -->
+        <nav id="hola" class="navbar navbar-expand-lg fixed-top navbar-scroll">
+          <div class="container-fluid">
+              
+              <!-- Elementos alineados a la izquierda: Vehículos y Repuestos -->
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav me-auto">
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'vehiculos:list' %}">Vehículos</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'lista_repuestos' %}">Repuestos</a>
+                      </li>
+                  </ul>
+      
+                  <!-- Elemento central: Liva -->
+                  <a class="navbar-brand mx-auto" href="{% url 'home:inicio' %}">Automotora</a>
+      
+                  <!-- Elementos alineados a la derecha: Mi cuenta y Cerrar sesión -->
+                  <ul class="navbar-nav ms-auto">
+                      <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="{% url 'usuarios:perfil' %}">Mi cuenta</a>
+                      </li>
+                      {% if user.is_authenticated %}
+                          <li class="nav-item">
+                              <form action="{% url 'usuarios:logout' %}" method="post">
+                                  {% csrf_token %}
+                                  <button type="submit" class="nav-link btn btn-link" style="color: #fff;">
+                                      Cerrar Sesión
+                                  </button>
+                              </form>
+                          </li>
+                      {% else %}
+                          <li class="nav-item">
+                              <a class="nav-link" href="{% url 'usuarios:login' %}">Iniciar Sesión</a>
+                          </li>
+                      {% endif %}
+                  </ul>
+              </div>
+          </div>
+      </nav>
+        <!-- Navbar -->
+      
+        <!--Section: Design Block-->
+        <div id="carouselExampleIndicators" class="carousel slide">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="https://www.wsupercars.com/wallpapers-regular/Porsche/2025-Porsche-911-GT3-008-2160.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="https://www.wsupercars.com/wallpapers-regular/Skoda/2025-Skoda-Kodiaq-RS-003-2160.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="https://www.wsupercars.com/wallpapers-regular/Skoda/2024-Skoda-Enyaq-RS-Race-Concept-007-2160.jpg" class="d-block w-100" alt="...">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="container">
+        <h2 class="text-center mb-4">Lista de repuestos disponibles en tienda</h2>
+    
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <!-- Card 1 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://api.autoplanet.cl/medias/sys_master/images/images/hf0/h02/9211708702750/medias-425034-1-1640878581.bin" 
+                         class="card-img-top" 
+                         alt="Imagen del repuesto" 
+                         style="height: 150px; object-fit: contain;">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>DGP</strong></h5>
+                        <p class="card-text">Set de 2 banquillos 6 toneladas DGP</p>
+                        <p class="card-text">$39.000</p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 2 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://api.autoplanet.cl/medias/sys_master/images/h05/hdf/9710180368414/drp300Wx300H_1073398_1-1702902214/drp300Wx300H-1073398-1-1702902214.webp" 
+                         class="card-img-top" 
+                         alt="Imagen del repuesto" 
+                         style="height: 150px; object-fit: contain;">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>POWER GRID</strong></h5>
+                        <p class="card-text">Kit de emergencia para auto full 8 piezas</p>
+                        <p class="card-text">$13.000</p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 3 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://api.autoplanet.cl/medias/sys_master/images/images/h11/hd0/9158825902110/medias-1121732-1-1636052955.bin" 
+                         class="card-img-top" 
+                         alt="Imagen del repuesto" 
+                         style="height: 150px; object-fit: contain;">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>BOWMANN</strong></h5>
+                        <p class="card-text">Radio para auto DD-6100A 2DIN 7" Bluetooth USB</p>
+                        <p class="card-text">$80.000</p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Card 4 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://api.autoplanet.cl/medias/sys_master/images/h5e/hd3/9746638176286/drp300Wx300H_1101991_1-1719510230/drp300Wx300H-1101991-1-1719510230.webp" 
+                         class="card-img-top" 
+                         alt="Imagen del repuesto" 
+                         style="height: 150px; object-fit: contain;">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>MODULA</strong></h5>
+                        <p class="card-text">Caja PortaEquipaje para auto modelo WEGO 360LTS Negro</p>
+                        <p class="card-text">$195.000</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5-->
+            <div class="col">
+              <div class="card h-100 shadow-sm">
+                  <img src="https://api.autoplanet.cl/medias/sys_master/images/images/hab/h1b/9364894744606/medias-1114774-1-1666696326.bin" 
+                       class="card-img-top" 
+                       alt="Imagen del repuesto" 
+                       style="height: 150px; object-fit: contain;">
+                  <div class="card-body">
+                      <h5 class="card-title"><strong>SPT</strong></h5>
+                      <p class="card-text">Kit de embrague 3 piezas suzuki celerio 1000 cc 2014-2015</p>
+                      <p class="card-text">$52.800</p>
+                  </div>
+              </div>
+          </div>
+          
+            <!-- Card 6-->
+            <div class="col">
+              <div class="card h-100 shadow-sm">
+                  <img src="https://api.autoplanet.cl/medias/sys_master/images/h33/h70/9691262713886/drp300Wx300H_1054086_1-1694788918/drp300Wx300H-1054086-1-1694788918.webp" 
+                       class="card-img-top" 
+                       alt="Imagen del repuesto" 
+                       style="height: 150px; object-fit: contain;">
+                  <div class="card-body">
+                      <h5 class="card-title"><strong>MOMO</strong></h5>
+                      <p class="card-text">Kit de lavado y secado Momo 4 piezas</p>
+                      <p class="card-text">$12.0000</p>
+                  </div>
+              </div>
+          </div>
+          
+            <!-- Card 7-->
+            <div class="col">
+              <div class="card h-100 shadow-sm">
+                  <img src="https://api.autoplanet.cl/medias/sys_master/images/hda/h84/9743854895134/drp300Wx300H_120878_1-1718641896/drp300Wx300H-120878-1-1718641896.webp" 
+                       class="card-img-top" 
+                       alt="Imagen del repuesto" 
+                       style="height: 150px; object-fit: contain;">
+                  <div class="card-body">
+                      <h5 class="card-title"><strong>MOTORLIFE</strong></h5>
+                      <p class="card-text">Set de limpieza motorlife 5 piezas</p>
+                      <p class="card-text">$8.000</p>
+                  </div>
+              </div>
+          </div>
+          
+            <!-- Card 8-->
+            <div class="col">
+              <div class="card h-100 shadow-sm">
+                  <img src="https://api.autoplanet.cl/medias/sys_master/images/h3b/h10/9659838857246/drp300Wx300H_1131201_1-1682041641/drp300Wx300H-1131201-1-1682041641.webp" 
+                       class="card-img-top" 
+                       alt="Imagen del repuesto" 
+                       style="height: 150px; object-fit: contain;">
+                  <div class="card-body">
+                      <h5 class="card-title"><strong>CASTROL</strong></h5>
+                      <p class="card-text">Aceite de motor castrol edge sintetico 5W3 5L</p>
+                      <p class="card-text">$50.000</p>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <footer class="text-center text-lg-start text-white"
+            style="background-color: rgb(34, 31, 31)"
+            style="opacity: 95%;"
+            >           
+      <!-- Grid container -->
+      <div class="container p-4 pb-0">
+          <!-- Section: Links -->
+          <section class="">
+              <div class="row">
+                  <!-- Company Info -->
+                  <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                      <h6 class="text-uppercase mb-4 font-weight-bold" style="font-weight: bold;">Automotora</h6>
+                      <p>Automotora dedicada a la reserva de vehiculos</p>
+                  </div>
+  
+                  <!-- Products -->
+                  <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                      <h6 class="text-uppercase mb-4 font-weight-bold" style="font-weight: bold;">Products</h6>
+                      <p><a href="#" class="text-white">MDBootstrap</a></p>
+                      <p><a href="#" class="text-white">MDWordPress</a></p>
+                      <p><a href="#" class="text-white">BrandFlow</a></p>
+                      <p><a href="#" class="text-white">Bootstrap Angular</a></p>
+                  </div>
+  
+                  <!-- Useful Links -->
+                  <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                      <h6 class="text-uppercase mb-4 font-weight-bold" style="font-weight: bold;">Useful links</h6>
+                      <p><a href="#" class="text-white">Your Account</a></p>
+                      <p><a href="#" class="text-white">Become an Affiliate</a></p>
+                      <p><a href="#" class="text-white">Shipping Rates</a></p>
+                      <p><a href="#" class="text-white">Help</a></p>
+                  </div>
+  
+                  <!-- Contact -->
+                  <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                      <h6 class="text-uppercase mb-4 font-weight-bold" style="font-weight: bold;">Contacto</h6>
+                      <p><i class="fas fa-home mr-3"></i> Santiago Centro, Av Los Zapadores, CH</p>
+                      <p><i class="fas fa-envelope mr-3"></i> autochile@automotora.cl</p>
+                      <p><i class="fas fa-phone mr-3"></i> + 56 9 3012 0457</p>
+                      <p><i class="fas fa-print mr-3"></i> + 56 9 6569 3128 </p>
+                  </div>
+              </div>
+          </section>
+  
+          <hr class="my-3">
+  
+          <!-- Section: Copyright -->
+          <section class="p-3 pt-0">
+              <div class="row d-flex align-items-center">
+                  <div class="col-md-7 col-lg-8 text-center text-md-start">
+                      <div class="p-3">
+                          © 2020 Copyright:
+                          <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+                      </div>
+                  </div>
+  
+                  <div class="col-md-5 col-lg-4 text-center text-md-end">
+                      <!-- Social Media Icons -->
+                      <a href="#" class="btn btn-outline-light btn-floating m-1" role="button"><i class="fab fa-facebook-f"></i></a>
+                      <a href="#" class="btn btn-outline-light btn-floating m-1" role="button"><i class="fab fa-twitter"></i></a>
+                      <a href="#" class="btn btn-outline-light btn-floating m-1" role="button"><i class="fab fa-google"></i></a>
+                      <a href="#" class="btn btn-outline-light btn-floating m-1" role="button"><i class="fab fa-instagram"></i></a>
+                  </div>
+              </div>
+          </section>
+      </div>
+  </footer>
+</body>

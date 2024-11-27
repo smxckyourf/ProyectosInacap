@@ -1,0 +1,68 @@
+body {
+    background-image: url('https://www.wsupercars.com/wallpapers-regular/Skoda/2025-Skoda-Kodiaq-RS-003-2160.jpg'); /* Cambia la URL si tienes otra imagen */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.form1{
+    width: 500px;
+    background-color: rgba(83, 78, 78, 0.5);
+    padding: 25px 25px;
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    position: absolute;
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    color: #ffffff;
+    margin-top: 7%;
+
+}
+
+.form1 input [type = "checkbox"]{
+    font-size: 5px;
+}
+
+.form1 input{
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.07);
+    border: none;
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #ffffff;
+    opacity: 100%;
+    font-size: 20px;
+    font-weight: 300px;
+}
+
+
+
+#id_disponibilidad{
+    height: auto;
+    width: auto;
+}
+
+#id_descripcion{
+    height: 50px;
+    width: 450px;
+}
+
+#imagen-clear_id{
+    height: auto;
+    width: auto;
+}
+
+.scrollable-form {
+    max-height: 820px; /* Ajusta esta altura según tus necesidades */
+    overflow-y: auto; /* Solo permite desplazamiento vertical */
+    overflow-x: hidden; /* Oculta el desplazamiento horizontal */
+    padding-right: 10px; /* Opcional: espacio para evitar que el contenido toque la barra de desplazamiento vertical */
+    margin-bottom: 20px; /* Espacio inferior para separar del botón */
+}

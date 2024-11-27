@@ -1,0 +1,228 @@
+
+#hola{
+    background-color: rgb(34, 31, 31);
+    opacity: 95%;
+  }
+.navbar-brand {
+    letter-spacing: 3px;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+.navbar-scroll .navbar-brand,
+.navbar-scroll .nav-link,
+.navbar-scroll .fa-bars {
+    color: #fff;
+  }
+  
+.navbar-scroll {
+    box-shadow: none;
+  }
+  
+.navbar-scrolled {
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.05);
+  }
+  
+.navbar-scrolled .navbar-brand,
+.navbar-scrolled .nav-link,
+.navbar-scrolled .fa-bars {
+    color: #ffffff;
+  }
+  
+.navbar-scrolled {
+    background-color: #fff;
+  }
+  
+@media (max-width: 450px) {
+    #intro {
+      height: 950px !important;
+    }
+  }
+  
+@media (min-width: 550px) and (max-width: 750px) {
+    #intro {
+      height: 1100px !important;
+    }
+  }
+  
+@media (min-width: 800px) and (max-width: 990px) {
+    #intro {
+      height: 600px !important;
+    }
+  }
+  
+.display-1 {
+    font-weight: 500 !important;
+    letter-spacing: 40px;
+  }
+  
+@media (min-width: 1600px) {
+    .display-1 {
+      font-size: 10rem;
+    }
+  }
+  
+  
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Montserrat:wght@400;700&display=swap');
+  
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+  }
+  
+  /* Category Ads */
+#ads {
+      margin: 100px 0;
+  }
+  
+#ads .card-notify-badge {
+      position: absolute;
+      left: -10px;
+      top: -20px;
+      background: #333330;
+      text-align: center;
+      border-radius: 30px;
+      color: #ffffff;
+      padding: 5px 10px;
+      font-size: 14px;
+  }
+  
+#ads .card-notify-year {
+      position: absolute;
+      right: -10px;
+      top: -20px;
+      background: #ff4444;
+      border-radius: 50%;
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+      width: 50px;
+      height: 50px;
+      padding: 15px 0 0 0;
+  }
+  
+#ads .card-detail-badge {
+      background: #333330;
+      text-align: center;
+      border-radius: 30px;
+      color: #ffffff;
+      padding: 5px 10px;
+      font-size: 14px;
+  
+  }
+  
+#ads .card:hover {
+      background: #fff;
+      box-shadow: 12px 15px 20px rgba(46,61,73,0.15);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+  }
+  
+#ads .card-image-overlay {
+      font-size: 20px;
+      
+  }
+  
+#ads .card-image-overlay span {
+      display: inline-block;
+  }
+  
+#ads .ad-btn {
+      text-transform: uppercase;
+      width: 150px;
+      height: 40px;
+      border-radius: 80px;
+      font-size: 16px;
+      line-height: 35px;
+      text-align: center;
+      border: 3px solid #333330;
+      display: block;
+      text-decoration: none;
+      margin: 20px auto 1px auto;
+      color: white;
+      overflow: hidden;
+      position: relative;
+      background-color: #333330;
+  } 
+  
+#ads .ad-btn:hover {
+      background-color: #333330;
+      color: black;
+      border: 2px solid #333330;
+      background: transparent;
+      transition: all 0.3s ease;
+      box-shadow: 12px 15px 20px rgba(46,61,73,0.15);
+  }
+  
+#ads .ad-title h5 {
+      text-transform: uppercase;
+      font-size: 18px;
+  }
+
+  
+footer a{
+  text-decoration: none;
+}
+
+
+.hero-banner {
+  display: block;
+  position: relative;
+  background-image: url('https://www.wsupercars.com/wallpapers-regular/Alpine/2018-Alpine-A110-009-1080.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Toda la altura de la ventana */
+  text-align: center;
+  color: white;
+  text-decoration: none; /* Quitar el subrayado */
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hero-banner button {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+#ads .card-notify-year {
+  background-color: rgb(255, 0, 0); /* Cambia a azul */
+}
+
+.boton-hover {
+  border: 1px solid;
+  overflow: hidden;
+  position: relative;
+}
+.boton-hover span {
+  z-index: 20;
+}
+.boton-hover:after {
+  background: #fff;
+  content: "";
+  height: 155px;
+  left: -75px;
+  opacity: .2;
+  position: absolute;
+  top: -50px;
+  width: 50px;
+  -webkit-transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+          transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+  -webkit-transform: rotate(35deg);
+      -ms-transform: rotate(35deg);
+          transform: rotate(35deg);
+  z-index: -10;
+}
+
+.boton-hover:hover:after {
+  left: 120%;
+  -webkit-transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+          transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+

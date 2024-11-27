@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Estado de la Transacción</title>
+</head>
+<body>
+    <h1>Estado de la Transacción</h1>
+    <p><strong>Estado:</strong> {{ response.status }}</p>
+    <p><strong>Orden de Compra:</strong> {{ response.buy_order }}</p>
+    <p><strong>Monto:</strong> {{ response.amount }}</p>
+    <p><strong>Fecha de Transacción:</strong> {{ response.transaction_date }}</p>
+    <p><strong>Detalle:</strong> {{ response }}</p>
+    <!-- Aquí puedes agregar más campos del `response` según los datos disponibles -->
+</body>
+</html>

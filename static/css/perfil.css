@@ -1,0 +1,89 @@
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: url('https://www.wsupercars.com/wallpapers-regular/Skoda/2025-Skoda-Kodiaq-RS-003-2160.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+/* Contenedor del perfil */
+.profile-container {
+    background-color: #fff;
+    width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    padding-top: 100px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.main-content {
+    margin-top: 80px;
+    flex: 1; /* Esto permite que el contenido crezca y empuje el footer hacia abajo */
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido dentro del contenedor principal */
+    justify-content: center; /* Centra horizontalmente */
+    padding: 20px;
+}
+
+/* Encabezado del perfil */
+.profile-header {
+    margin-bottom: 20px;
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.user-role {
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Detalles del perfil */
+.profile-details {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.profile-details p {
+    margin: 8px 0;
+}
+
+.form1{
+    background-color: rgba(255, 255, 255, 0.8); /* Blanco con transparencia */
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+}
+
+footer {
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    text-align: left;
+    margin-top: 20px;
+}
+
+
+footer .column {
+    flex: 1;
+    padding: 10px 20px;
+    min-width: 200px;
+}
+

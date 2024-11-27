@@ -1,0 +1,64 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+}
+
+.vehicle-title {
+    font-weight: bold;
+    color: #2a2a2a;
+}
+
+.image-container img {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-borderless td {
+    padding: 10px;
+    border: none;
+    font-size: 16px;
+}
+
+.text-muted {
+    color: #888;
+}
+
+.btn-custom {
+    border-radius: 20px;
+    padding: 10px 20px;
+    transition: all 0.3s;
+}
+
+.btn-custom:hover {
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+footer a{
+    text-decoration: none;
+}
+
+/* Limita el ancho del slider */
+.carousel-container {
+    max-width: 600px; /* Ajusta el tamaño según tus necesidades */
+    margin: auto;
+}
+
+.carousel-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+#h2-modelo{
+    font-weight: bold;
+}
+
+tr td{
+    font-weight: bold;
+}
+
+table{
+    font-weight: bold;
+}

@@ -1,0 +1,120 @@
+/* Estilos extraídos de diseñonuevo.html */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #080710;
+}
+
+.form1 {
+    margin-top: 30px;
+    width: 450px;
+    background-color: rgba(255, 255, 255, 0.13);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    padding: 50px 35px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column; 
+}
+
+.form1 h3 {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 42px;
+    text-align: center;
+}
+
+.form1 input[type="text"],
+.form1 input[type="password"],
+.form1 input[type="email"] {
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.07);
+    border: none;
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 20px;
+    font-weight: 300px;
+    color: #ffffff;
+}
+#id_grupo {
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.07);
+    border: none;
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 20px;
+    font-weight: 300;
+    color: #ffffff;
+    box-sizing: border-box;
+}
+
+#id_grupo {
+    font-size: 14px;
+    color: #000;
+}
+
+.form1 button {
+    margin-top: 20px;
+    width: 100%;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.form1 button:hover {
+    background-color: #080710;
+    color: #ffffff;
+}
+
+.background-section {
+    background-image: url('https://www.wsupercars.com/wallpapers-regular/Skoda/2025-Skoda-Kodiaq-RS-003-2160.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+.helptext {
+    display: none;
+}
+
+.login-container {
+    height: 100%;
+}
+
+/* Ajustes adicionales */
+.form1 .form-group {
+    margin-bottom: 20px; /* Espacio entre los campos y los mensajes de error */
+}
+
+.form1 .errorlist {
+    color: #ff5f5f; /* Color de los mensajes de error */
+    font-size: 14px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+/* Estilo del contenedor del formulario para que se ajuste automáticamente */
+.form1 {
+    max-height: calc(100vh - 100px); /* Altura máxima en relación al viewport */
+    overflow-y: auto; /* Agregar scroll si el contenido es demasiado alto */
+}
+
+label{
+    font-weight: bold;
+}

@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>   
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automotora</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  
+</head>
+<!-- base.html -->
+
+
+<body>
+    <header>
+        <!-- Navbar -->
+        <nav id="hola2" class="navbar navbar-expand-lg fixed-top navbar-scroll">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home:inicio' %}">Liva</a>
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+              data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="{% url 'usuarios:perfil' %}">Mi cuenta</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'lista_repuestos' %}">Repuestos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'home:inicio' %}">Vehiculos</a>
+                </li>
+                <li class="nav-item">
+                  {% if user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'usuarios:login' %}">Cerrar Sesión</a>
+                  {% else %}
+                    <a class="nav-link" href="{% url 'usuarios:login' %}">Iniciar Sesión</a>
+                  {% endif %}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+      </header>
