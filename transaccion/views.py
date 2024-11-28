@@ -10,6 +10,7 @@ from vehiculos.models import Vehiculo
 from reserva_vehiculo.models import Reserva
 from transaccion.models import Transaccion
 import uuid
+from .models import Ingresos
 
 
 logger = logging.getLogger(__name__)
@@ -127,4 +128,8 @@ def estado_transaccion(request, token):
 
 def cancelar_pago(request):
     # Si es necesario, puedes capturar datos relevantes de la transacción que se cancela
-    return render(request, 'transaccion_cancelada.html')
+    return render(request, 'transaccion_cancelada.html')    
+
+def vista_total_ingresos(request):
+    total_ingresos = Ingresos.calcular_total_ingresos()
+    return render(request, 'ingresos_totales.html', {'total_ingresos': total_ingresos})
