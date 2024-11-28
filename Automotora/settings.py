@@ -9,12 +9,8 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-import dj_database_url
 from pathlib import Path
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -84,7 +80,19 @@ WSGI_APPLICATION = 'Automotora.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'automotora',
+        'USER': 'admin',
+        'PASSWORD': 'benjaroot',
+        'HOST': 'automotora-benja.ccoln5b9mk2h.us-east-1.rds.amazonaws.com',
+        'PORT': 3306,
+        'OPTIONS': {
+            'ssl': {
+                'ca': os.path.join(BASE_DIR, 'certs', 'us-east-1-bundle.pem'),
+            }
+        },
+    }
 }
 
 
