@@ -97,7 +97,7 @@ def confirmacion_pago(request):
             reserva.save()
             return render(request, 'pago_exitoso.html', {'response': response, 'reserva': reserva})
         else:
-            reserva.estado = 'Pendiente'
+            reserva.estado = 'Fallida'
             reserva.save()
             return render(request, 'pago_fallido.html', {'response': response, 'reserva': reserva})
     

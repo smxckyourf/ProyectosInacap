@@ -141,6 +141,10 @@
                 <td>${{vehiculo.precio}}</td>
             </tr>
             <tr>
+                <td class="text-muted">Categoria</td>
+                <td>{{vehiculo.categoria}}</td>
+            </tr>
+            <tr>
                 <td class="text-muted">Km</td>
                 <td>{{vehiculo.kilometraje}}</td>
             </tr>
@@ -168,8 +172,8 @@
     <br>
     <!-- Botones de acción -->
     <div class="actions">
-        <a href="{% url 'home:inicio' %}" class="btn btn-secondary">Volver</a>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal">Pagar</button>
+        <a href="{% url 'home:inicio' %}" class="btn btn-dark">Volver</a>
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">Pagar</button>
     </div>
 
     <!-- Modal de Confirmación -->

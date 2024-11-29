@@ -1,7 +1,6 @@
 # urls.py
 from django.urls import path
 from . import views
-
 urlpatterns = [
     path('iniciar-pago/<int:vehiculo_id>/', views.iniciar_pago, name='iniciar_pago'),
     path('webpay-confirmacion/', views.confirmacion_pago, name='confirmacion_pago'),

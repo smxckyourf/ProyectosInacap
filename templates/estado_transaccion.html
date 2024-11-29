@@ -2,15 +2,76 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estado de la Transacción</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            text-align: left;
+        }
+        h1 {
+            color: #222; /* Tono oscuro de gris */
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        p strong {
+            color: #000; /* Resalta los títulos */
+        }
+        .detail {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #ccc;
+            font-size: 14px;
+            color: #555;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #333; /* Negro para el botón */
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: #444; /* Tono más claro de negro para el hover */
+        }
+    </style>
 </head>
 <body>
-    <h1>Estado de la Transacción</h1>
-    <p><strong>Estado:</strong> {{ response.status }}</p>
-    <p><strong>Orden de Compra:</strong> {{ response.buy_order }}</p>
-    <p><strong>Monto:</strong> {{ response.amount }}</p>
-    <p><strong>Fecha de Transacción:</strong> {{ response.transaction_date }}</p>
-    <p><strong>Detalle:</strong> {{ response }}</p>
-    <!-- Aquí puedes agregar más campos del `response` según los datos disponibles -->
+    <div class="container">
+        <h1>Estado de la Transacción</h1>
+        <p><strong>Estado:</strong> {{ response.status }}</p>
+        <p><strong>Orden de Compra:</strong> {{ response.buy_order }}</p>
+        <p><strong>Monto:</strong> {{ response.amount }}</p>
+        <p><strong>Fecha de Transacción:</strong> {{ response.transaction_date }}</p>
+        <div class="detail">
+            <strong>Detalle:</strong> {{ response }}
+        </div>
+        <a href="/" class="button">Volver al inicio</a>
+    </div>
 </body>
 </html>

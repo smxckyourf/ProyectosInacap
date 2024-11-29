@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Total de Ingresos</title>
+    <title>Pago Fallido</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -25,40 +25,34 @@
             text-align: center;
         }
         h1 {
-            color: #222; /* Tono oscuro de gris */
+            color: #d32f2f; /* Rojo oscuro para indicar error */
             font-size: 24px;
             margin-bottom: 20px;
         }
         p {
-            font-size: 18px;
+            font-size: 16px;
             margin: 10px 0;
             color: #333;
-        }
-        .highlight {
-            font-weight: bold;
-            font-size: 22px;
-            color: #000; /* Negro para destacar el monto */
         }
         .button {
             display: inline-block;
             margin-top: 20px;
             padding: 10px 20px;
             color: #fff;
-            background-color: #333; /* Negro para el botón */
+            background-color: #d32f2f; /* Rojo oscuro para el botón */
             text-decoration: none;
             border-radius: 5px;
             font-size: 16px;
         }
         .button:hover {
-            background-color: #444; /* Tono más claro de negro para el hover */
+            background-color: #b71c1c; /* Rojo más oscuro en hover */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Total de Ingresos</h1>
-        <p>El total de ingresos acumulados es:</p>
-        <p class="highlight">${{ total_ingresos }}</p>
+        <h1>Pago Fallido</h1>
+        <p>Hubo un problema al procesar tu transacción. Por favor, intenta nuevamente.</p>
         <a href="/" class="button">Volver al inicio</a>
     </div>
 </body>

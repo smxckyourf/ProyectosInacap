@@ -43,6 +43,9 @@
             <!-- Elementos alineados a la derecha: Mi cuenta y Cerrar sesión -->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'vista_total_ingresos' %}">Ingresos</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{% url 'usuarios:perfil' %}">Mi cuenta</a>
                 </li>
                 {% if user.is_authenticated %}

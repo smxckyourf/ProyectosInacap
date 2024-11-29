@@ -3,7 +3,6 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import views as auth_views
 from . import views
-
 app_name = 'usuarios'  # Define el namespace para la aplicación 'usuarios'
 
 urlpatterns = [

@@ -158,3 +158,9 @@ TRANSBANK_ENVIRONMENT = 'TEST'  # Usa 'PRODUCCION' para producción
 
 
 #CONFIGURACION PARA RECUPERACION DE CONTRASEÑA
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'joaquinvarascaceres2@gmail.com'  # Reemplaza con tu correo
+EMAIL_HOST_PASSWORD = 'mhte djgv brlr shkz '    # Reemplaza con tu contraseña o usa una app password si usas Gmail

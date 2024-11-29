@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .forms import RegistroForm
 from django.contrib.auth.decorators import login_required
+from transaccion.models import Ingresos
+
 
 def perfil_usuario(request):
     # Aquí puedes agregar la lógica para mostrar el perfil del usuario
@@ -36,3 +38,4 @@ def registro(request):
 @login_required
 def perfil(request):
     return render(request, 'usuarios/perfil.html', {'user': request.user})
+

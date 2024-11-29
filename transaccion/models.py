@@ -8,6 +8,7 @@ from django.db.models import Sum
 
 
 
+
 class Transaccion(models.Model):
     ESTADOS_TRANSACCION = [
         ('AUTHORIZED', 'Autorizada'),
