@@ -81,7 +81,7 @@ form .btn:hover{
 }
 
 .background-section {
-    background-image: url('https://www.wsupercars.com/wallpapers-regular/Skoda/2025-Skoda-Kodiaq-RS-003-2160.jpg');
+    background-image: url('/static/images/mazdaback.jpg');
     background-size: cover; /* La imagen cubrirá todo el área */
     background-position: center; /* Centrar la imagen */
     background-repeat: no-repeat; /* Evitar que la imagen se repita */

@@ -1,5 +1,5 @@
 body {
-    background-image: url('https://www.wsupercars.com/wallpapers-regular/Skoda/2025-Skoda-Kodiaq-RS-003-2160.jpg'); /* Cambia la URL si tienes otra imagen */
+    background-image: url('/static/images/mazdaback.jpg'); /* Cambia la URL si tienes otra imagen */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

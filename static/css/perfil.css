@@ -3,7 +3,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-image: url('https://www.wsupercars.com/wallpapers-regular/Skoda/2025-Skoda-Kodiaq-RS-003-2160.jpg');
+    background-image: url('/static/images/mazdaback.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

@@ -11,6 +11,10 @@ from reserva_vehiculo.models import Reserva
 from transaccion.models import Transaccion
 import uuid
 from .models import Ingresos
+from django.db.models import Sum
+from calendar import month_name
+from django.utils.timezone import now
+from django.contrib import messages
 
 
 logger = logging.getLogger(__name__)
@@ -128,8 +132,51 @@ def estado_transaccion(request, token):
 
 def cancelar_pago(request):
     # Si es necesario, puedes capturar datos relevantes de la transacción que se cancela
-    return render(request, 'transaccion_cancelada.html')    
+    return render(request, 'transaccion_cancelada.html') 
+
+def obtener_meses():
+    nombres_meses = [
+        {'numero': i, 'nombre': nombre} 
+        for i, nombre in enumerate(
+            ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+             'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'], 
+            start=1
+        )
+    ]
+    return nombres_meses   
 
 def vista_total_ingresos(request):
-    total_ingresos = Ingresos.calcular_total_ingresos()
-    return render(request, 'ingresos_totales.html', {'total_ingresos': total_ingresos})
+    # Obtener los parámetros del filtro desde el GET
+    month = request.GET.get('month')
+    year = request.GET.get('year')
+
+    # Validar el año
+    current_year = now().year
+    if year and int(year) > current_year:
+        messages.error(request, "El año no puede ser mayor al actual.")
+        return render(request, 'ingresos_totales.html', {
+            'total_ingresos': 0,
+            'month': month,
+            'year': year,
+            'meses': obtener_meses()  # Pasa los meses en español
+        })
+
+    # Obtener todos los ingresos
+    ingresos = Ingresos.objects.all()
+
+    # Filtrar por mes y/o año si se seleccionaron
+    if month:
+        ingresos = ingresos.filter(fecha_ingreso__month=month)
+    if year:
+        ingresos = ingresos.filter(fecha_ingreso__year=year)
+
+    # Calcular el total de ingresos
+    total_ingresos = ingresos.aggregate(total=Sum('monto'))['total'] or 0
+
+    # Pasar los valores al template
+    return render(request, 'ingresos_totales.html', {
+        'total_ingresos': total_ingresos,
+        'month': month,
+        'year': year,
+        'meses': obtener_meses()  # Pasa los meses en español
+    })

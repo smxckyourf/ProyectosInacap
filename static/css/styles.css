@@ -167,7 +167,7 @@ footer a{
 .hero-banner {
   display: block;
   position: relative;
-  background-image: url('https://www.wsupercars.com/wallpapers-regular/Alpine/2018-Alpine-A110-009-1080.jpg');
+  background-image: url('/static/images/mazdaback.jpg');
   background-size: cover;
   background-position: center;
   height: 100vh; /* Toda la altura de la ventana */
