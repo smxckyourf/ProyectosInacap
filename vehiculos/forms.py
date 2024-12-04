@@ -3,6 +3,18 @@ from .models import Vehiculo, ImagenVehiculo
 from django.forms import modelformset_factory
 
 class VehiculoForm(forms.ModelForm):
+
+    CATEGORIA_CHOICES = [
+        ('SUV', 'SUV'),
+        ('Sedan', 'Sedan'),
+        ('Hatchback', 'Hatchback'),
+        ('Camioneta', 'Camioneta'),
+        ('Deportivo', 'Deportivo'),
+        ('Otro', 'Otro'),
+    ]
+
+    categoria = forms.ChoiceField(choices=CATEGORIA_CHOICES, required=True, label="Categoría")
+
     class Meta:
         model = Vehiculo
         fields = '__all__'  # o especifica los campos: ['marca', 'modelo', 'año', etc.]

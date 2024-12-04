@@ -2,9 +2,9 @@ from django.shortcuts import render
 from vehiculos.models import Vehiculo
 
 def inicio(request):
-    # Obtener todas las marcas y categorías disponibles
+    # Obtener todas las marcas y categorías únicas de los vehículos
     marcas = Vehiculo.objects.values_list('marca', flat=True).distinct()
-    categorias = Vehiculo.objects.values_list('categoria', flat=True).distinct()  # Supongamos que 'categoria' es un campo en tu modelo
+    categorias = Vehiculo.objects.values_list('categoria', flat=True).distinct()  # Filtramos las categorías únicas
     
     # Obtener los filtros seleccionados
     marca_seleccionada = request.GET.get('marca', '')
@@ -20,7 +20,7 @@ def inicio(request):
     return render(request, 'home/inicio.html', {
         'vehiculos': vehiculos,
         'marcas': marcas,
-        'categorias': categorias,
+        'categorias': categorias,  # Pasa las categorías obtenidas
         'marca_seleccionada': marca_seleccionada,
         'categoria_seleccionada': categoria_seleccionada
     })
