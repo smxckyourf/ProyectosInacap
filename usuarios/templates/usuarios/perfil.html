@@ -44,10 +44,16 @@
                   <li class="nav-item">
                       <a class="nav-link" aria-current="page" href="{% url 'transaccion:iniciar_suscripcion' %}">Suscripción</a>
                   </li>
-                {% endif %}
-                <li class="nav-item">
+                  <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{% url 'transaccion:vista_total_ingresos' %}">Ingresos</a>
                 </li>
+                {% endif %}
+                {% if user.is_authenticated and user|pertenece_a_grupo:"Administrador" %}
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="{% url 'transaccion:vista_total_ingresos_adm' %}">Ingresos ADM</a>
+                </li>
+                {% endif %}
+
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{% url 'usuarios:perfil' %}">Mi cuenta</a>
                 </li>
@@ -82,14 +88,27 @@
                 <div class="profile-container">
                     <div class="profile-details">
                         <h2>Detalles del Usuario</h2>
+
                         <p><strong>Nombre:</strong> {{ user.first_name }} {{ user.last_name }} </p>
+
                         <p><strong>Email:</strong> {{ user.email }}</p>
+
                         <p><strong>Plan Actual:</strong>{{ plan }}</p>
+
                         {% if fecha_termino %}
                           <p><strong>Fecha de Término: </strong>{{ fecha_termino|date:"d/m/Y" }}</p>
                         {% else %}
                           <p><strong>Fecha de Término:</strong> No disponible</p>
-                        {% endif %}
+                        {% endif %} 
+
+                        <p><strong>Límite de Inventario:</strong> 
+                          {% if limite_inventario == "inf" %}
+                              Ilimitado
+                          {% else %}
+                              {{ limite_inventario }} vehículos
+                          {% endif %}
+
+                      </p>
                     </div>
                 </div>
             </form>

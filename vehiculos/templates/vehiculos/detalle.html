@@ -189,7 +189,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-primary" onclick="confirmReservation()" data-url="{% url 'iniciar_pago' vehiculo.id %}">Confirmar Reserva</button>
+              <button type="button" class="btn btn-primary" onclick="confirmReservation()" data-url="{% url 'transaccion:iniciar_pago' vehiculo.id %}">Confirmar Reserva</button>
             </div>
           </div>
         </div>

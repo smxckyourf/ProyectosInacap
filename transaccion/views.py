@@ -308,3 +308,41 @@ def confirmacion_suscripcion(request, suscripcion_id):
         return render(request, 'suscripcion/error.html', {
             'error': f"Error al procesar la transacción: {str(e)}"
         })
+    
+
+@login_required
+def vista_total_ingresos_adm(request):
+    # Obtener los parámetros del filtro desde el GET
+    month = request.GET.get('month')
+    year = request.GET.get('year')
+
+    # Validar el año
+    current_year = now().year
+    if year and int(year) > current_year:
+        messages.error(request, "El año no puede ser mayor al actual.")
+        return render(request, 'ingresos_mensuales.html', {
+            'total_ingresos': 0,
+            'month': month,
+            'year': year,
+            'meses': obtener_meses()  # Pasa los meses en español
+        })
+
+    # Obtener todos los ingresos
+    pagos = PagoSuscripcion.objects.all()
+
+    # Filtrar por mes y/o año si se seleccionaron
+    if month:
+        pagos = pagos.filter(fecha_pago__month=month)
+    if year:
+        pagos = pagos.filter(fecha_pago__year=year)
+
+    # Calcular el total de ingresos
+    total_ingresos = pagos.aggregate(total=Sum('monto'))['total'] or 0
+
+    # Pasar los valores al template
+    return render(request, 'suscripcion/ingresos_mensuales.html', {
+        'total_ingresos': total_ingresos,
+        'month': month,
+        'year': year,
+        'meses': obtener_meses()  # Pasa los meses en español
+    })

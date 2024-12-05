@@ -122,6 +122,20 @@ class Suscripcion(models.Model):
             # Sumar un mes a la fecha de inicio
             self.fecha_termino = self.fecha_inicio + relativedelta(months=1)
         super().save(*args, **kwargs)
+
+    @property
+    def limite_inventario(self):
+        """
+        Devuelve el límite de inventario según el plan basado en el monto.
+        """
+        if self.monto == 10000:  # Plan Básico
+            return 50
+        elif self.monto == 20000:  # Plan Intermedio
+            return 200
+        elif self.monto == 30000:  # Plan Avanzado
+            return float('inf')  # Ilimitado
+        else:
+            return 0  # Sin inventario si el monto no corresponde a un plan válido
     
     
 class PagoSuscripcion(models.Model):
@@ -132,3 +146,10 @@ class PagoSuscripcion(models.Model):
 
     def __str__(self):
         return f"Pago de {self.monto} para la suscripción de {self.suscripcion.propietario.username}"
+    
+    def calcular_ingresos_mensuales_adm(mes, anio):
+        ingresos = Ingresos.objects.filter(
+        fecha_ingreso__year=anio,
+        fecha_ingreso__month=mes
+        ).aggregate(total=Sum('monto'))
+        return ingresos['total'] or 0  # Devuelve 0 si no hay ingresos  

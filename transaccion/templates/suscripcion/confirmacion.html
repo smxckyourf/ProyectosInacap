@@ -4,12 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmación de Suscripción</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+        }
+        h1 {
+            color: #222;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        p {
+            margin: 10px 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+        ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        ul li:last-child {
+            border-bottom: none;
+        }
+        li span {
+            font-weight: bold;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #444;
+        }
+    </style>
 </head>
 <body>
-    <h1>¡Gracias por tu suscripción!</h1>
-
-    {% if suscripcion %}
-        <p><strong>Plan:</strong> 
+    <div class="container">
+        <h1>¡Gracias por tu suscripción!</h1>
+        {% if suscripcion %}
+        <p><strong>Plan:</strong>
             {% if suscripcion.monto == 10000 %}
                 Básico
             {% elif suscripcion.monto == 20000 %}
@@ -24,8 +81,12 @@
         <p><strong>Estado de la suscripción:</strong> {{ suscripcion.estado }}</p>
         <p><strong>Fecha de inicio:</strong> {{ suscripcion.fecha_inicio }}</p>
         <p><strong>Fecha de término:</strong> {{ suscripcion.fecha_termino }}</p>
-    {% else %}
+        {% else %}
         <p>No se encontró información sobre la suscripción.</p>
-    {% endif %}
+        {% endif %}
+        
+        <!-- Botón para volver al inicio -->
+        <a href="{% url 'home:inicio' %}" class="button">Volver al Inicio</a>
+    </div>
 </body>
 </html>

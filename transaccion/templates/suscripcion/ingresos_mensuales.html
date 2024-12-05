@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total de Ingresos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'images/mazdaback.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+        }
+        .form-input {
+            width: 100%; /* Asegura que todos los inputs tengan el mismo ancho */
+            max-width: 300px; /* O el valor que uses */
+            margin-bottom: 10px; /* Espaciado entre elementos */
+        }
+        
+        .btn-filtrar {
+            width: 100%; /* Mantiene el botón del mismo ancho que los inputs */
+            max-width: 300px; /* Ajusta el mismo valor de ancho que los inputs */
+            text-align: center; /* Centra el texto dentro del botón */
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        select, input {
+            padding: 10px;
+            font-size: 14px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .button {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #444;
+        }
+        .highlight {
+            font-weight: bold;
+            font-size: 18px;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Total de Ingresos</h1>
+        <form method="GET" class="form-group">
+            <!-- Bloque para mostrar mensajes -->
+            {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <select name="month" class="form-control form-input">
+                <option value="">Seleccione el mes</option>
+                {% for mes in meses %}
+                    <option value="{{ mes.numero }}" {% if month == mes.numero|stringformat:"d" %}selected{% endif %}>
+                        {{ mes.nombre }}
+                    </option>
+                {% endfor %}
+            </select>
+            <input type="number" name="year" placeholder="Año" class="form-control form-input" value="{{ year|default:'' }}">
+            <button type="submit" class="btn btn-primary form-input btn-filtrar">Filtrar</button>
+        </form>
+        <p>El total de ingresos acumulados es:</p>
+        <p class="highlight">${{ total_ingresos }}</p>
+        <a href="/" class="button">Volver al inicio</a>
+    </div>
+
+
+</body>
+</html>
