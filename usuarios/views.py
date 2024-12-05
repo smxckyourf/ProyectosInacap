@@ -2,12 +2,30 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .forms import RegistroForm
 from django.contrib.auth.decorators import login_required
-from transaccion.models import Ingresos
+from transaccion.models import Suscripcion
 
 
 def perfil_usuario(request):
-    # Aquí puedes agregar la lógica para mostrar el perfil del usuario
-    return render(request, 'usuarios/perfil.html')
+    # Filtrar la suscripción activa más reciente del usuario
+    suscripcion = Suscripcion.objects.filter(propietario=request.user, estado="ACTIVA").order_by('-fecha_inicio').first()
+
+    # Determinar el plan y fecha de término
+    if suscripcion:
+        if suscripcion.monto == 10000:
+            plan = "Plan Básico"
+        elif suscripcion.monto == 20000:
+            plan = "Plan Intermedio"
+        elif suscripcion.monto == 30000:
+            plan = "Plan Avanzado"
+        else:
+            plan = "Plan Desconocido"
+
+        fecha_termino = suscripcion.fecha_termino
+    else:
+        plan = "Sin plan"
+        fecha_termino = None
+
+    return render(request, 'usuarios/perfil.html', {'plan': plan, 'fecha_termino': fecha_termino})
 
 def registro(request):
     if request.method == "POST":
