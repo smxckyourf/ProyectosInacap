@@ -15,6 +15,11 @@ from django.db.models import Sum
 from calendar import month_name
 from django.utils.timezone import now
 from django.contrib import messages
+from .models import Suscripcion, PagoSuscripcion
+from django.shortcuts import render, get_object_or_404
+from dateutil.relativedelta import relativedelta
+
+
 
 
 logger = logging.getLogger(__name__)
@@ -49,6 +54,7 @@ def iniciar_pago(request, vehiculo_id):
         token = response['token']
 
         # Guarda el token en la reserva para seguimiento
+        print(f"Redirigiendo a: {redirect_url}?token_ws={token}")  # Agrega esto para depurar
         reserva.transaccion_id = token
         reserva.save()
 
@@ -144,7 +150,7 @@ def obtener_meses():
         )
     ]
     return nombres_meses   
-
+@login_required
 def vista_total_ingresos(request):
     # Obtener los parámetros del filtro desde el GET
     month = request.GET.get('month')
@@ -180,3 +186,125 @@ def vista_total_ingresos(request):
         'year': year,
         'meses': obtener_meses()  # Pasa los meses en español
     })
+
+
+
+##### VISTAS PARA LA SUSCRIPCIÓN
+
+def iniciar_suscripcion(request):
+    if request.method == 'POST':
+
+        suscripcion_existente = Suscripcion.objects.filter(propietario=request.user, estado='ACTIVA').first()
+        if suscripcion_existente:
+            return render(request, 'suscripcion/suscripcionlista.html', {'error': 'Ya tienes una suscripción activa.'})
+        # Captura el plan seleccionado desde el formulario
+        plan = request.POST.get('plan')
+
+        # Verifica que se haya seleccionado un plan
+        if not plan:
+            return render(request, 'suscripcion/escogeplan.html', {
+                'error': 'Por favor, selecciona un plan antes de continuar.'
+            })
+
+
+        # Lógica para determinar el monto según el plan seleccionado
+        if plan == 'plan_basico':
+            monto = 10000
+        elif plan == 'plan_intermedio':
+            monto = 20000
+        elif plan == 'plan_avanzado':
+            monto = 30000
+        else:
+            return render(request, 'suscripcion/planinvalido.html', {
+                'error': 'Plan no válido.'
+            })
+
+        # Crear la suscripción con estado "Pendiente"
+        suscripcion = Suscripcion.objects.create(
+            propietario=request.user,
+            monto=monto,
+            estado='PENDIENTE',
+            fecha_termino=None  # Fecha de término se establece tras el pago
+        )
+
+        # Configuración de Webpay
+        options = WebpayOptions(
+            commerce_code=settings.TRANSBANK_CC,
+            api_key=settings.TRANSBANK_API_KEY,
+            integration_type=IntegrationType.TEST  # Usar TEST para pruebas
+        )
+        tx = Transaction(options)
+
+        # Configuración de la transacción
+        buy_order = f"subs_{suscripcion.id}"
+        session_id = str(uuid.uuid4())
+        return_url = request.build_absolute_uri(f'/confirmacion-suscripcion/{suscripcion.id}/')
+
+        try:
+            # Crear la transacción con Webpay
+            response = tx.create(buy_order, session_id, monto, return_url)
+            redirect_url = response['url']
+            token = response['token']
+
+            # Asocia el token de Webpay a la suscripción
+            suscripcion.transaccion_id = token
+            suscripcion.save()
+
+            # Redirige al usuario a Webpay
+            return redirect(f"{redirect_url}?token_ws={token}")
+
+        except Exception as e:
+            return render(request, 'suscripcion/opciones.html', {
+                'warning': f"Error al conectar con Webpay: {str(e)}"
+            })
+
+    # Renderiza el formulario inicial
+    return render(request, 'suscripcion/opciones.html')
+
+def confirmacion_suscripcion(request, suscripcion_id):
+    # Obtén la suscripción
+    suscripcion = get_object_or_404(Suscripcion, id=suscripcion_id)
+
+    # Obtén el token de Webpay
+    token_ws = request.GET.get('token_ws')
+
+    # Verifica el estado del pago con Webpay
+    options = WebpayOptions(
+        commerce_code=settings.TRANSBANK_CC,
+        api_key=settings.TRANSBANK_API_KEY,
+        integration_type=IntegrationType.TEST
+    )
+    tx = Transaction(options)
+
+    try:
+        # Verifica el estado de la transacción con Webpay
+        response = tx.commit(token_ws)
+
+        if response['status'] == 'AUTHORIZED':  # Pago autorizado
+            # Actualiza el estado de la suscripción a "Activa"
+            suscripcion.estado = 'ACTIVA'
+            suscripcion.fecha_termino = suscripcion.fecha_inicio + relativedelta(months=1)
+            suscripcion.save()
+
+            # Registra el pago como "Pagado"
+            pago = PagoSuscripcion.objects.create(
+                suscripcion=suscripcion,
+                monto=suscripcion.monto,
+                estado='PAGADO'
+            )
+        else:
+            # Si el pago falla, deja la suscripción como "Pendiente" o "Inactiva"
+            suscripcion.estado = 'INACTIVA'
+            suscripcion.save()
+            pago = None
+
+        return render(request, 'suscripcion/confirmacion.html', {
+            'suscripcion': suscripcion,
+            'pago': pago,
+            'response': response
+        })
+
+    except Exception as e:
+        return render(request, 'suscripcion/error.html', {
+            'error': f"Error al procesar la transacción: {str(e)}"
+        })

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Suscripción</title>
+</head>
+<body>
+    <h1>¡Gracias por tu suscripción!</h1>
+
+    {% if suscripcion %}
+        <p><strong>Plan:</strong> 
+            {% if suscripcion.monto == 10000 %}
+                Básico
+            {% elif suscripcion.monto == 20000 %}
+                Intermedio
+            {% elif suscripcion.monto == 30000 %}
+                Avanzado
+            {% else %}
+                No identificado
+            {% endif %}
+        </p>
+        <p><strong>Monto pagado:</strong> {{ suscripcion.monto }} CLP</p>
+        <p><strong>Estado de la suscripción:</strong> {{ suscripcion.estado }}</p>
+        <p><strong>Fecha de inicio:</strong> {{ suscripcion.fecha_inicio }}</p>
+        <p><strong>Fecha de término:</strong> {{ suscripcion.fecha_termino }}</p>
+    {% else %}
+        <p>No se encontró información sobre la suscripción.</p>
+    {% endif %}
+</body>
+</html>

@@ -4,6 +4,9 @@ from vehiculos.models import Vehiculo
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db.models import Sum
+from django.db import models
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 
 
@@ -92,3 +95,40 @@ def calcular_ingresos_mensuales(mes, anio):
         fecha_ingreso__month=mes
     ).aggregate(total=Sum('monto'))
     return ingresos['total'] or 0  # Devuelve 0 si no hay ingresos
+
+
+class Suscripcion(models.Model):
+    ESTADOS_SUSCRIPCION = [
+        ('PENDIENTE', 'Pendiente'),
+        ('ACTIVA', 'Activa'),
+        ('INACTIVA', 'Inactiva'),
+        ('CANCELADA', 'Cancelada'),
+    ]
+
+    propietario = models.ForeignKey(User, on_delete=models.CASCADE)  # Relacionado al propietario
+    monto = models.DecimalField(max_digits=10, decimal_places=2)  # Monto de la suscripción
+    fecha_inicio = models.DateTimeField(auto_now_add=True)  # Fecha de creación
+    fecha_termino = models.DateTimeField(null=True, blank=True)  # Fecha de vencimiento
+    estado = models.CharField(max_length=20, choices=ESTADOS_SUSCRIPCION, default='PENDIENTE')  # Estado inicial
+
+    def __str__(self):
+        return f"Suscripción de {self.propietario.username} - {self.estado} (${self.monto})"
+
+    def __str__(self):
+        return f"Suscripción de {self.propietario.username} - {self.estado} (${self.monto})"
+    
+    def save(self, *args, **kwargs):
+        if self.fecha_inicio and not self.fecha_termino:
+            # Sumar un mes a la fecha de inicio
+            self.fecha_termino = self.fecha_inicio + relativedelta(months=1)
+        super().save(*args, **kwargs)
+    
+    
+class PagoSuscripcion(models.Model):
+    suscripcion = models.ForeignKey('Suscripcion', on_delete=models.CASCADE)  # Relación con la suscripción
+    monto = models.DecimalField(max_digits=10, decimal_places=2)  # Monto del pago
+    fecha_pago = models.DateTimeField(auto_now_add=True)  # Fecha en la que se realiza el pago
+    estado = models.CharField(max_length=20, choices=[('PAGADO', 'Pagado'), ('PENDIENTE', 'Pendiente')], default='PENDIENTE')
+
+    def __str__(self):
+        return f"Pago de {self.monto} para la suscripción de {self.suscripcion.propietario.username}"
