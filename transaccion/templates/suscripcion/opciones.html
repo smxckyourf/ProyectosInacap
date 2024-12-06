@@ -39,7 +39,34 @@
                 </div>
                 <button type="submit" class="btn-submit">Pagar</button>
             </form>
+            <div class="btn-container">
+                <a href="{% url 'usuarios:perfil' %}" class="btn-back">Volver a Mi Perfil</a>
+            </div>
         </section>
     </main>
+    <style>
+        .btn-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #141313;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background-color: #333;
+            transform: translateY(-2px);
+        }
+
+        
+    </style>
 </body>
 </html>

@@ -18,6 +18,7 @@ from django.contrib import messages
 from .models import Suscripcion, PagoSuscripcion
 from django.shortcuts import render, get_object_or_404
 from dateutil.relativedelta import relativedelta
+from .utils import group_required
 
 
 
@@ -150,7 +151,10 @@ def obtener_meses():
         )
     ]
     return nombres_meses   
+
+
 @login_required
+@group_required('propietario')
 def vista_total_ingresos(request):
     # Obtener los parámetros del filtro desde el GET
     month = request.GET.get('month')
@@ -190,7 +194,8 @@ def vista_total_ingresos(request):
 
 
 ##### VISTAS PARA LA SUSCRIPCIÓN
-
+@login_required
+@group_required('propietario')
 def iniciar_suscripcion(request):
     if request.method == 'POST':
 
@@ -309,8 +314,8 @@ def confirmacion_suscripcion(request, suscripcion_id):
             'error': f"Error al procesar la transacción: {str(e)}"
         })
     
-
 @login_required
+@group_required('administrador')
 def vista_total_ingresos_adm(request):
     # Obtener los parámetros del filtro desde el GET
     month = request.GET.get('month')

@@ -38,9 +38,11 @@
       
                   <!-- Elementos alineados a la derecha: Mi cuenta y Cerrar sesión -->
                   <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
                       <li class="nav-item">
                           <a class="nav-link" aria-current="page" href="{% url 'usuarios:perfil' %}">Mi cuenta</a>
                       </li>
+                    {% endif %}
                       {% if user.is_authenticated %}
                           <li class="nav-item">
                               <form action="{% url 'usuarios:logout' %}" method="post">
@@ -115,7 +117,7 @@
                 {% endfor %}
             </select>
     
-            <button class=" btn btn-dark btm-sm" type="submit">Filtrar</button>
+            <button id="btn-filtro "class=" btn btn-dark btm-sm" type="submit">Filtrar</button>
         </form>
     </div>
       

@@ -24,8 +24,8 @@ class VehiculoForm(forms.ModelForm):
         marca = self.cleaned_data.get('marca')
         if not marca:
             raise forms.ValidationError("La marca es obligatoria.")
-        if len(marca) > 50:
-            raise forms.ValidationError("La marca no puede tener más de 50 caracteres.")
+        if len(marca) > 20:
+            raise forms.ValidationError("La marca no puede tener más de 20 caracteres.")
         return marca
 
     # Validación personalizada para el campo 'modelo'
@@ -33,8 +33,8 @@ class VehiculoForm(forms.ModelForm):
         modelo = self.cleaned_data.get('modelo')
         if not modelo:
             raise forms.ValidationError("El modelo es obligatorio.")
-        if len(modelo) > 50:
-            raise forms.ValidationError("El modelo no puede tener más de 50 caracteres.")
+        if len(modelo) > 20:
+            raise forms.ValidationError("El modelo no puede tener más de 20 caracteres.")
         return modelo
 
     # Validación personalizada para el campo 'año'

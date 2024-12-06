@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Vehiculo(models.Model):
     propietario = models.ForeignKey(User, on_delete=models.CASCADE,  blank=True)
-    marca = models.CharField(max_length=50)
-    modelo = models.CharField(max_length=50)
+    marca = models.CharField(max_length=20)
+    modelo = models.CharField(max_length=20)
     año = models.IntegerField()
     precio = models.IntegerField()
     kilometraje = models.IntegerField()
